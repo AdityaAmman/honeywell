@@ -1,0 +1,195 @@
+# ===========================================
+# requirements.txt
+# ===========================================
+
+streamlit>=1.28.0
+ultralytics>=8.0.0
+opencv-python-headless>=4.8.0
+numpy>=1.24.0
+pandas>=2.0.0
+plotly>=5.15.0
+scikit-learn>=1.3.0
+
+# ===========================================
+# README.md
+# ===========================================
+
+# 🔒 AI Surveillance Dashboard
+
+An intelligent security monitoring system powered by computer vision and machine learning for real-time threat detection.
+
+## 🏆 Hackathon Project Features
+
+- **🔪 Weapon Detection** - Real-time identification of dangerous objects
+- **🥊 Violence Detection** - Automatic fight and aggressive behavior detection  
+- **💰 Theft Alert System** - Smart object movement analysis
+- **📦 Unattended Object Monitoring** - Security breach detection
+- **📊 Live Analytics Dashboard** - Real-time insights and reporting
+- **🌐 Cloud-Ready Deployment** - No complex setup required
+
+## 🚀 Quick Start
+
+### Option 1: Streamlit Cloud (Recommended)
+1. Fork this repository
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Deploy from your GitHub repo
+4. Get instant public URL!
+
+### Option 2: Local Demo
+```bash
+pip install -r requirements.txt
+streamlit run surveillance_app.py
+```
+
+### Option 3: Hugging Face Spaces
+1. Create new Space at [huggingface.co/spaces](https://huggingface.co/spaces)
+2. Upload files
+3. Select Streamlit as framework
+4. Deploy automatically!
+
+## 🎯 Demo Mode
+
+The application includes a comprehensive demo mode that generates realistic security events - perfect for hackathon presentations when you don't have access to live video feeds or YOLO models.
+
+## 🛠️ Technical Stack
+
+- **Frontend**: Streamlit
+- **AI/ML**: YOLO v8, OpenCV
+- **Visualization**: Plotly
+- **Deployment**: Cloud-native (Streamlit Cloud, Hugging Face, etc.)
+
+## 📱 Live Demo
+
+🔗 **Demo URL**: [your-app.streamlitapp.com](https://your-app.streamlitapp.com)
+
+## 🎬 Hackathon Presentation
+
+This project demonstrates:
+- Advanced computer vision implementation
+- Real-time AI processing
+- User-friendly dashboard design
+- Scalable cloud deployment
+- Practical security applications
+
+Perfect for showcasing at hackathons, tech demos, and competitions!
+
+## 📊 Screenshots
+
+[Add screenshots of your dashboard here]
+
+## 👥 Team
+
+- [Your Name] - AI/ML Engineer
+- [Team Member] - Full Stack Developer
+- [Team Member] - UI/UX Designer
+
+## 🏅 Competition Ready
+
+This project is optimized for:
+- ✅ Quick deployment (under 5 minutes)
+- ✅ No external dependencies (ngrok-free)
+- ✅ Professional presentation
+- ✅ Scalable architecture
+- ✅ Real-world applications
+
+---
+
+*Built for [Hackathon Name] 2024*
+
+# ===========================================
+# .streamlit/config.toml
+# ===========================================
+
+[theme]
+primaryColor = "#1f77b4"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f2f6"
+textColor = "#262730"
+
+[server]
+headless = true
+port = 8501
+enableCORS = false
+enableXsrfProtection = false
+
+# ===========================================
+# Dockerfile (Optional - for containerized deployment)
+# ===========================================
+
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "surveillance_app.py", "--server.address", "0.0.0.0"]
+
+# ===========================================
+# .gitignore
+# ===========================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files (too large for git)
+*.pt
+*.onnx
+*.weights
+
+# Video files
+*.mp4
+*.avi
+*.mov
+
+# Logs
+*.log
+logs/
+
+# ===========================================
+# app.py (Alternative main file for HF Spaces)
+# ===========================================
+
+# This is identical to surveillance_app.py but renamed for Hugging Face Spaces
+# Just copy the surveillance_app.py content here
+
+# ===========================================
+# packages.txt (For Streamlit Cloud - if needed)
+# ===========================================
+
+libgl1-mesa-glx
+libglib2.0-0
+libsm6
+libxext6
+libxrender-dev
+libgomp1
+
+# ===========================================
+# runtime.txt (For Heroku-style platforms)
+# ===========================================
+
+python-3.9.16
