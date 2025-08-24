@@ -9,14 +9,14 @@ This surveillance dashboard provides an advanced threat detection system capable
 ## GitHub Repository and Streamlit Deployment
 
 ### Repository Structure
-This project is hosted on GitHub and designed for easy deployment with Streamlit. The main application file is `surveillance_dashboard.py` which contains the complete dashboard implementation.
+This project is hosted on GitHub and designed for easy deployment with Streamlit. The main application file is `surveillance_app.py` which contains the complete dashboard implementation.
 
 ### Streamlit Cloud Deployment
 The application can be deployed directly to Streamlit Cloud:
 
 1. Fork or clone the repository to your GitHub account
 2. Connect your GitHub account to Streamlit Cloud
-3. Select the repository and specify `surveillance_dashboard.py` as the main file
+3. Select the repository and specify `surveillance_app.py` as the main file
 4. The app will automatically deploy and be accessible via a public URL
 
 ### Local Development with Streamlit
@@ -31,7 +31,7 @@ cd ai-surveillance-dashboard
 pip install -r requirements.txt
 
 # Run the Streamlit app
-streamlit run surveillance_dashboard.py
+streamlit run surveillance_app.py
 # Alternatively use the streamlit dashboard and run the app by selecting the repository
 ```
 
