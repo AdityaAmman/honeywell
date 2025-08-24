@@ -356,12 +356,56 @@ def demo_event_processor():
     if not st.session_state.demo_mode or not st.session_state.is_running:
         return
     
-    demo_generator = DemoEventGenerator()
+    # Initialize demo generator in session state if not exists
+    if 'demo_generator' not in st.session_state:
+        st.session_state.demo_generator = DemoEventGenerator()
     
-    # Generate event with some probability
-    event = demo_generator.generate_event()
-    if event:
+    # Force generate events more frequently for demo
+    current_time = time.time()
+    if 'last_demo_event' not in st.session_state:
+        st.session_state.last_demo_event = current_time - 10  # Force immediate event
+    
+    # Generate event every 3-5 seconds when monitoring is active
+    time_since_last = current_time - st.session_state.last_demo_event
+    if time_since_last >= 3:  # Generate event every 3 seconds minimum
+        
+        # Force event generation for demo
+        event_types = [
+            {'type': 'weapon_detected', 'class': 'knife', 'severity': 'critical'},
+            {'type': 'fight_detected', 'class': 'person', 'severity': 'critical'},
+            {'type': 'theft_detected', 'class': 'laptop', 'severity': 'high'},
+            {'type': 'theft_detected', 'class': 'handbag', 'severity': 'high'},
+            {'type': 'unattended_object', 'class': 'backpack', 'severity': 'medium'},
+            {'type': 'unattended_object', 'class': 'suitcase', 'severity': 'medium'},
+        ]
+        
+        # Select random event
+        import random
+        selected_event = random.choice(event_types)
+        
+        confidence = random.uniform(0.75, 0.95)
+        track_id = random.randint(1, 100)
+        
+        details_map = {
+            'weapon_detected': f"🔪 {selected_event['class'].title()} detected at coordinates (X:{random.randint(100,500)}, Y:{random.randint(100,400)}) with {confidence:.0%} confidence",
+            'fight_detected': f"🥊 Aggressive behavior detected between multiple persons (Violence Score: {random.uniform(0.7,0.9):.2f})",
+            'theft_detected': f"💰 Rapid movement of {selected_event['class']} detected - Speed: {random.uniform(120,250):.1f} px/s",
+            'unattended_object': f"📦 {selected_event['class'].title()} has been stationary for {random.randint(35,120)} seconds - Security protocol activated"
+        }
+        
+        event = {
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'event': selected_event['type'],
+            'track_id': track_id,
+            'class': selected_event['class'],
+            'severity': selected_event['severity'],
+            'confidence': confidence,
+            'details': details_map[selected_event['type']]
+        }
+        
+        # Add event to session state
         st.session_state.events.append(event)
+        st.session_state.last_demo_event = current_time
         
         # Update stats
         event_type = event['event']
@@ -388,7 +432,7 @@ def main_dashboard():
     create_sidebar()
     
     # Control panel
-    col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+    col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 1])
     
     with col1:
         st.subheader("🎮 System Control Center")
@@ -396,6 +440,38 @@ def main_dashboard():
     with col2:
         if st.button("▶️ Start Monitoring", type="primary", use_container_width=True):
             st.session_state.is_running = True
+            
+            # Add some initial demo events for immediate impact
+            if st.session_state.demo_mode and len(st.session_state.events) == 0:
+                initial_events = [
+                    {
+                        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        'event': 'weapon_detected',
+                        'track_id': 42,
+                        'class': 'knife',
+                        'severity': 'critical',
+                        'confidence': 0.89,
+                        'details': '🔪 Knife detected at entrance (X:245, Y:180) - Security alert triggered'
+                    },
+                    {
+                        'timestamp': (datetime.now() - timedelta(seconds=30)).strftime('%Y-%m-%d %H:%M:%S'),
+                        'event': 'unattended_object',
+                        'track_id': 15,
+                        'class': 'backpack',
+                        'severity': 'medium',
+                        'confidence': 0.92,
+                        'details': '📦 Backpack has been stationary for 45 seconds in lobby area'
+                    }
+                ]
+                
+                for event in initial_events:
+                    st.session_state.events.append(event)
+                    st.session_state.stats['total_events'] += 1
+                    if event['event'] == 'weapon_detected':
+                        st.session_state.stats['weapons_detected'] += 1
+                    elif event['event'] == 'unattended_object':
+                        st.session_state.stats['unattended_objects'] += 1
+            
             st.success("🟢 AI Surveillance ACTIVE!")
             st.rerun()
     
@@ -406,6 +482,17 @@ def main_dashboard():
             st.rerun()
     
     with col4:
+        if st.button("🎬 Generate Event", use_container_width=True, help="Manually trigger a demo event"):
+            if st.session_state.demo_mode:
+                # Force generate an event immediately
+                st.session_state.last_demo_event = time.time() - 10
+                demo_event_processor()
+                st.success("🚨 Demo event generated!")
+                st.rerun()
+            else:
+                st.info("Enable demo mode to generate events")
+    
+    with col5:
         if st.button("🗑️ Clear Events", use_container_width=True):
             st.session_state.events.clear()
             st.session_state.stats = {k: 0 for k in st.session_state.stats}
