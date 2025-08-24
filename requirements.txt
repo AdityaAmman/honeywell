@@ -1,12 +1,17 @@
-# Fixed requirements.txt for Streamlit Cloud deployment
-# This version removes problematic dependencies and focuses on core functionality
+streamlit>=1.28.0
+numpy>=1.21.0
+pandas>=1.3.0
+plotly>=5.0.0
+opencv-python-headless>=4.5.0
+Pillow>=8.0.0
 
-streamlit
-numpy
-pandas
-plotly
-opencv-python-headless
-scikit-learn
+# Lightweight ML alternatives (try one at a time)
+# Option 1: Minimal YOLO
+ultralytics>=8.0.0
 
-# Optional: Only add if you need YOLO (may cause deployment issues)
-# ultralytics
+# Option 2: If ultralytics fails, try older version  
+# yolov5==7.0.13
+
+# Option 3: Alternative object detection
+# imageio>=2.9.0
+# scikit-image>=0.18.0
