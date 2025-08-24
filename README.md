@@ -32,6 +32,7 @@ pip install -r requirements.txt
 
 # Run the Streamlit app
 streamlit run surveillance_dashboard.py
+# Alternatively use the streamlit dashboard and run the app by selecting the repository
 ```
 
 ### Streamlit Features Utilized
@@ -181,11 +182,6 @@ The system employs sophisticated algorithms to generate realistic security event
 - Confidence threshold slider
 - Real-time settings application
 
-**System Status**
-- YOLO model availability indicator
-- Current system time display
-- Component status monitoring
-
 ### Analytics Dashboard
 
 **Visualization Components**
@@ -290,28 +286,12 @@ st.session_state.is_running = False  # System status
 - Graceful degradation for missing dependencies
 - User-friendly error messaging
 
-## Performance Considerations
-
-### Video Processing
-- Frame skipping for performance optimization
-- Progressive analysis with real-time feedback
-- Memory management for large files
-
-### Real-time Updates
-- Efficient state management
-- Minimal computational overhead
-- Responsive user interface updates
-
-## Limitations and Requirements
+## Requirements
 
 ### System Requirements
 - Python 3.7+ with Streamlit framework
 - OpenCV for video processing
 - Sufficient system memory for video analysis
 
-### Functional Limitations
-- YOLO integration optional but recommended
-- Video format support limited to common types
-- Real-time processing depends on system performance
 
-This surveillance dashboard provides a comprehensive solution for security monitoring with advanced AI analysis capabilities, user-friendly interface, and extensive customization options.
+This surveillance dashboard provides a comprehensive solution for security monitoring with advanced AI analysis capabilities, user-friendly interface and extensive customization options for all types of scenarios.
