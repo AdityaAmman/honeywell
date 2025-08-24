@@ -5,13 +5,10 @@ plotly>=5.0.0
 opencv-python-headless>=4.5.0
 Pillow>=8.0.0
 
-# Lightweight ML alternatives (try one at a time)
+# Lightweight ML alternatives 
 # Option 1: Minimal YOLO
 ultralytics>=8.0.0
 
 # Option 2: If ultralytics fails, try older version  
 # yolov5==7.0.13
 
-# Option 3: Alternative object detection
-# imageio>=2.9.0
-# scikit-image>=0.18.0
