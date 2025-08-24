@@ -286,13 +286,39 @@ def create_sidebar():
         
         # Video source configuration
         st.subheader("📹 Video Input")
-        source_options = ["Demo Video", "Webcam", "Upload Video"]
+        source_options = ["Demo Video", "Webcam", "Upload Video", "Sample Videos"]
         source_type = st.selectbox("Source Type:", source_options)
+        
+        video_source = 0  # Default to webcam
         
         if source_type == "Webcam":
             camera_id = st.selectbox("Camera:", [0, 1, 2])
+            video_source = camera_id
         elif source_type == "Upload Video":
-            uploaded_file = st.file_uploader("Upload video file", type=['mp4', 'avi', 'mov'])
+            uploaded_file = st.file_uploader(
+                "📁 Upload your MP4 file:", 
+                type=['mp4', 'avi', 'mov', 'mkv'],
+                help="Drag and drop your video file here"
+            )
+            if uploaded_file is not None:
+                # Save uploaded file temporarily
+                import tempfile
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
+                    tmp_file.write(uploaded_file.read())
+                    video_source = tmp_file.name
+                st.success(f"✅ Video uploaded: {uploaded_file.name}")
+                st.info("🎬 Click 'Start Monitoring' to analyze your video!")
+            else:
+                st.info("👆 Please upload a video file to analyze")
+        elif source_type == "Sample Videos":
+            sample_options = {
+                "Demo Clip 1": "demo1.mp4",
+                "Demo Clip 2": "demo2.mp4", 
+                "Test Footage": "test.mp4"
+            }
+            selected_sample = st.selectbox("Choose demo video:", list(sample_options.keys()))
+            video_source = sample_options[selected_sample]
+            st.info("🎬 Using demo video - perfect for presentations!")
         
         st.divider()
         
