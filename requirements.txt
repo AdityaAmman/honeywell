@@ -7,10 +7,10 @@ Pillow>=8.0.0
 
 # Lightweight ML alternatives (try one at a time)
 # Option 1: Minimal YOLO
-ultralytics>=8.0.0
+# ultralytics>=8.0.0
 
 # Option 2: If ultralytics fails, try older version  
-# yolov5==7.0.13
+yolov5==7.0.13
 
 # Option 3: Alternative object detection
 # imageio>=2.9.0
