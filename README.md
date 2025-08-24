@@ -89,7 +89,7 @@ pip install opencv-python
 pip install numpy
 pip install pandas
 pip install plotly
-pip install ultralytics  # Optional for YOLO integration
+pip install ultralytics 
 ```
 
 ### Basic Setup
