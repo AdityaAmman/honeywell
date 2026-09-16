@@ -48,8 +48,6 @@ streamlit run app.py
 
 ### ✅ Streamlit Cloud (recommended)
 
-This app is a Python/Streamlit application and **cannot** be deployed via GitHub Pages (which only hosts static HTML/CSS/JS files).
-
 To deploy on [Streamlit Cloud](https://streamlit.io/cloud):
 
 1. Push this repo to GitHub.
@@ -57,7 +55,7 @@ To deploy on [Streamlit Cloud](https://streamlit.io/cloud):
 3. Click **New app** → select your repo → set **Main file path** to `app.py`.
 4. Click **Deploy**. Streamlit Cloud will install `requirements.txt` and `packages.txt` automatically.
 
-Your app will be live at `https://<your-username>-<repo>-app-<hash>.streamlit.app`.
+App will be live at `https://<your-username>-<repo>-app-<hash>.streamlit.app`.
 
 ### Alternative: Railway / Render / Fly.io
 
